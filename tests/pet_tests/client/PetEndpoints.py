@@ -29,9 +29,9 @@ class PetEndpoints(APIRequests):
         res = super().http_post(url, json.dumps(dict(body)))
         return res
 
-    def delete_pet_by_id(self, pet_id: int) -> ApiResponse:
+    def delete_pet_by_id(self, pet_id: int, should_ignore_exception: bool = False) -> ApiResponse:
         url = f'{super().BASE_URL}/pet/{pet_id}'
-        res = super().http_delete(url)
+        res = super().http_delete(url, should_ignore_exception=should_ignore_exception)
         try:
             return ApiResponse(**res.json())
         except JSONDecodeError:

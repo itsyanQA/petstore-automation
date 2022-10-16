@@ -21,9 +21,9 @@ class StoreEndpoints(APIRequests):
         except Exception as e:
             return ApiResponseMetaData(api_response=res.json(), status_code=res.status_code)
 
-    def delete_purchase_order_by_id(self, orderId: int):
+    def delete_purchase_order_by_id(self, orderId: int, should_ignore_exception: bool = False):
         url: str = f'{super().BASE_URL}/store/order/{orderId}'
-        res = super().http_delete(url)
+        res = super().http_delete(url=url, should_ignore_exception=should_ignore_exception)
         return ApiResponse(**res.json())
 
     def get_inventory_details(self):

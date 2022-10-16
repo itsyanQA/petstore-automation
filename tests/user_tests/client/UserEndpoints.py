@@ -11,9 +11,9 @@ from scheme_custom.UserMetaData import UserMetaData
 
 
 class UserEndpoints(APIRequests):
-    def post_create_users_with_list(self, user_object: list[dict[User]]) -> ApiResponse:
+    def post_create_users_with_list(self, user_object: list[dict[User]], should_ignore_exception: bool = False) -> ApiResponse:
         url: str = f"{super().BASE_URL}/user/createWithList"
-        res = super().http_post(url, json.dumps(user_object, indent=1))
+        res = super().http_post(url, json.dumps(user_object, indent=1), should_ignore_exception=should_ignore_exception)
         return ApiResponse(**res.json())
 
     def get_user_by_username(self, username: str, should_ignore_exception: bool = False) -> Union[UserMetaData, ApiResponseMetaData]:
@@ -29,9 +29,9 @@ class UserEndpoints(APIRequests):
         res = super().http_put(url, json.dumps(dict(body)))
         return ApiResponse(**res.json())
 
-    def delete_user(self, username: str) -> Union[ApiResponse, int]:
+    def delete_user(self, username: str, should_ignore_exception: bool = False) -> Union[ApiResponse, int]:
         url: str = f"{super().BASE_URL}/user/{username}"
-        res = super().http_delete(url)
+        res = super().http_delete(url, should_ignore_exception=should_ignore_exception)
         try:
             return ApiResponse(**res.json())
         except JSONDecodeError:

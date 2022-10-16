@@ -60,7 +60,7 @@ class TestPet(PetEndpoints, unittest.TestCase):
         pet_info = self.__create_a_pet()
 
         # action
-        delete_response = self.delete_pet_by_id(pet_info["id"])
+        delete_response = self.delete_pet_by_id(pet_info["id"], should_ignore_exception=True)
 
         # assert
         self.assertEqual(delete_response.code, 200)
@@ -88,7 +88,7 @@ class TestPet(PetEndpoints, unittest.TestCase):
         invalid_pet: int = random_functions.get_random_number(15)
 
         # action
-        delete_response = self.delete_pet_by_id(invalid_pet)
+        delete_response = self.delete_pet_by_id(invalid_pet, should_ignore_exception=True)
 
         # assert
         self.assertEqual(delete_response, 404)

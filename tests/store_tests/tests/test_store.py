@@ -59,7 +59,7 @@ class TestStore(WrapperStoreEndpoints, PetEndpoints, unittest.TestCase):
         order_id: int = random_functions.get_random_number(15)
 
         # action
-        delete_order: ApiResponse = super().delete_purchase_order_by_id(order_id)
+        delete_order: ApiResponse = super().delete_purchase_order_by_id(order_id, should_ignore_exception=True)
 
         # assert
         self.assertEqual(delete_order.code, 404)

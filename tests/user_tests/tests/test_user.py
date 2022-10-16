@@ -91,7 +91,7 @@ class TestUser(WrapperUserEndpoints, unittest.TestCase):
         generated_username: str = random_functions.get_random_string(50)
 
         # action
-        delete_user: int = super().delete_user(generated_username)
+        delete_user: int = super().delete_user(generated_username, should_ignore_exception=True)
 
         # assert
         self.assertEqual(delete_user, 404)
@@ -142,7 +142,7 @@ class TestUser(WrapperUserEndpoints, unittest.TestCase):
         invalid_object = {}
 
         # action
-        multiple_user_details: ApiResponse = super().post_create_users_with_list(invalid_object)
+        multiple_user_details: ApiResponse = super().post_create_users_with_list(invalid_object, should_ignore_exception=True)
 
         # assert
         self.assertEqual(multiple_user_details.code, 500)

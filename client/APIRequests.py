@@ -22,32 +22,51 @@ class APIRequests:
             return None
 
     @staticmethod
-    def http_post(url: str, body: Union[dict, str] = None, is_form_data: bool = False):
+    def http_post(url: str, body: Union[dict, str] = None, is_form_data: bool = False, should_ignore_exception: bool = False):
         """Generic POST request method"""
         logger.info(f"Sending POST Request To: [{url}], with body [{body}]")
-        if is_form_data:
-            headers = {"Content-Type": "application/x-www-form-urlencoded"}
-            request = requests.post(url=url, data=body, headers=headers)
-            response: requests.models.Response = request
-            return response
-        else:
-            request = requests.post(url=url, json=json.loads(body))
-            response: requests.models.Response = request
-            return response
+        try:
+            if is_form_data:
+                headers = {"Content-Type": "application/x-www-form-urlencoded"}
+                request = requests.post(url=url, data=body, headers=headers)
+                response: requests.models.Response = request
+                if not should_ignore_exception:
+                    response.raise_for_status()
+                return response
+            else:
+                request = requests.post(url=url, json=json.loads(body))
+                response: requests.models.Response = request
+                if not should_ignore_exception:
+                    response.raise_for_status()
+                return response
+        except Exception as e:
+            logger.error(f"POST Request has failed with the exception of: [{e}]")
+            return None
 
     @staticmethod
-    def http_delete(url: str):
+    def http_delete(url: str, should_ignore_exception: bool = False):
         """Generic DELETE request method"""
         logger.info(f"Sending DELETE Request To: [{url}]")
-        request = requests.delete(url=url)
-        response: requests.models.Response = request
-        return response
+        try:
+            request = requests.delete(url=url)
+            response: requests.models.Response = request
+            if not should_ignore_exception:
+                response.raise_for_status()
+            return response
+        except Exception as e:
+            logger.error(f"DELETE Request has failed with the exception of: [{e}]")
+            return None
 
     @staticmethod
     def http_put(url: str, body: str):
         """Generic PUT request method"""
-        logger.info(f"Sending PUT Request To: [{url}]")
-        request = requests.put(url=url, json=json.loads(body))
-        response: requests.models.Response = request
-        return response
+        try:
+            logger.info(f"Sending PUT Request To: [{url}]")
+            request = requests.put(url=url, json=json.loads(body))
+            response: requests.models.Response = request
+            response.raise_for_status()
+            return response
+        except Exception as e:
+            logger.error(f"PUT Request has failed with the exception of: [{e}]")
+            return None
 

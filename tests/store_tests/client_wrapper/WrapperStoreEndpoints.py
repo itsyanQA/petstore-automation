@@ -25,8 +25,8 @@ class WrapperStoreEndpoints(StoreEndpoints):
         else:
             return super().get_purchase_order_by_id(orderId=orderId, should_ignore_exception=should_ignore_exception)
 
-    def delete_purchase_order_by_id(self, orderId: int):
-        return super().delete_purchase_order_by_id(orderId)
+    def delete_purchase_order_by_id(self, orderId: int, should_ignore_exception: bool = False):
+        return super().delete_purchase_order_by_id(orderId, should_ignore_exception)
 
     def get_inventory_details(self):
         return super().get_inventory_details()
