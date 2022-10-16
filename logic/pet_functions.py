@@ -1,4 +1,4 @@
-from random import randint, random, choice
+from random import randint, choice
 from helper import random_functions
 from models.enum.Status import Status
 from models.request.Pet import Pet
