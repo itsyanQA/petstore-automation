@@ -4,7 +4,7 @@ from models.request.Order import Order
 from helper import random_functions
 
 
-def build_order_object(id_: int, petId: int= None, quantity: int = None, shipDate = None, status: OrderStatus = None, complete: bool = None):
+def build_order_object(id_: int, petId: int = None, quantity: int = None, shipDate = None, status: OrderStatus = None, complete: bool = None):
     """Builds the nessaccary data for the order object"""
     order_object = Order(id=id_)
 

@@ -1,12 +1,9 @@
-from typing import Final
-
 from helper import random_functions
 from logic import pet_functions as helper
 from models.enum.Status import Status
 from models.request.Pet import Pet
 import pytest
 import unittest
-
 from models.response.ApiResponse import ApiResponse
 from scheme_custom.PetMetaData import PetMetaData
 from scheme_custom.PetMetaDataCustomStatus import PetMetaDataCustomStatus

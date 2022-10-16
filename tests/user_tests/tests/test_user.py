@@ -110,7 +110,7 @@ class TestUser(WrapperUserEndpoints, unittest.TestCase):
         self.assertEqual(login_details.type, 'unknown')
         self.assertEqual(login_message_without_session_number, "logged in user")
 
-    def test_login_success(self):
+    def test_logout_success(self):
         """Send GET request for logout endpoint, assert for successful results."""
         # action
         logout_details: ApiResponse = super().get_user_logout()
