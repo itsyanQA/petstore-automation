@@ -21,8 +21,11 @@ Go to the project directory and run
 ```
 $ pip install -r requirements.txt
 ```
-Go to the tests directory and run
+Go to the tests directory
 ```
 $ cd ../PetstoreAutomation/tests
+```
+run
+```
 $ pytest
 ```
